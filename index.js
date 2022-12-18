@@ -12,8 +12,8 @@ const TOKEN = process.env.TOKEN
 
 const LOAD_SLASH = process.argv[2] == "load"
 
-const CLIENT_ID = "1053714869809066114"
-const GUILD_ID = "862007380668710942"
+const CLIENT_ID = ""
+const GUILD_ID = ""
 
 const client = new Discord.Client({
     intents: [
@@ -23,7 +23,7 @@ const client = new Discord.Client({
     ]
 })
 
-const welcomeChannelId = "1046774871281123389"
+const welcomeChannelId = ""
 
 client.on("guildMemberAdd", async (member) => {
     const img = await generateImage(member)
