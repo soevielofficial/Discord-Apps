@@ -7,7 +7,7 @@ a simple welcomer and music player bot for discord server
 ## npm packages installation
 
 ```bash
-npm dotenv discord.js discord-player @discordjs/voice @discordjs/rest @discordjs/opus @discordjs/builders
+npm i dotenv discord.js discord-player @discordjs/voice @discordjs/rest @discordjs/opus @discordjs/builders
 ```
 ## authors
 
