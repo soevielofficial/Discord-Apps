@@ -4,7 +4,9 @@
 </p>
 
 ## Lin
-
+<p align="center" width="100%">
+    <img height="100px" src="https://i.imgur.com/wQFA35d.png" alt="profile1">
+</p>
 a simple bot for Discord Server
 
 Support:
