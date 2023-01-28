@@ -1,5 +1,5 @@
 <p align="center" width="100%">
-    <img height="175px" src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0b5061df29d55a92d945_full_logo_blurple_RGB.svg" alt="profile">
+    <img height="100px" src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0b5061df29d55a92d945_full_logo_blurple_RGB.svg" alt="profile">
 </p>
 
 ## Lin
