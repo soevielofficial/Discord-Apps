@@ -4,7 +4,7 @@
 
 ## Lin
 
-a simple bot for Discord Server
+a source code to create discord bot
 
 Support:
 - Welcomer Image/Messages
