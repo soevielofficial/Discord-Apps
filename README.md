@@ -9,12 +9,12 @@ a source code to create discord bot
 Support:
 - Welcomer Image/Messages
 - Music Player
-- ChatGPT using Discord(Coming Soon)
+- ChatGPT using Discord
 
 ## npm packages installation
 
 ```bash
-npm i dotenv discord.js discord-player @discordjs/voice @discordjs/rest @discordjs/opus @discordjs/builders
+npm i dotenv discord.js discord-player @discordjs/voice @discordjs/rest @discordjs/opus @discordjs/builders openai
 ```
 ## authors
 
