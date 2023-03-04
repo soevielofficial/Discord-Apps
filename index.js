@@ -1,6 +1,6 @@
-const { Client, Events, GatewayIntentBits } = require("discord.js")
+const Discord = require("discord.js")
 const dotenv = require("dotenv")
-const { OpenAIApi, Configuration } = require("openai")
+// const { OpenAIApi, Configuration } = require("openai")
 const { REST } = require("@discordjs/rest")
 const { Routes } = require("discord-api-types/v9")
 const fs = require("fs")
@@ -13,62 +13,63 @@ const TOKEN = process.env.TOKEN
 
 const LOAD_SLASH = process.argv[2] == "load"
 
-const CLIENT_ID = "1064046998149419068" //APLICATION ID
-const GUILD_ID = "862007380668710942" //SERVER ID
+const CLIENT_ID = "" //APLICATION ID
+const GUILD_ID = "" //SERVER ID
 
-const client = new Client({
+const client = new Discord.Client({
     intents: [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent
+        "Guilds",
+        "GuildMessages",
+        "MessageContent",
+        "GuildVoiceStates"
     ]
 })
 
-const config = new Configuration({
-    apiKey: process.env.OPENAI_KEY
-})
+// const config = new Configuration({
+//     apiKey: process.env.OPENAI_KEY
+// })
 
-const openai = new OpenAIApi(config)
+// const openai = new OpenAIApi(config)
 
-const BOT_CHANNEL = "1046774871281123389"
-const PAST_MESSAGES = 5
+// const BOT_CHANNEL = "1046774871281123389"
+// const PAST_MESSAGES = 5
 
-client.on(Events.MessageCreate, async (message) => {
-    if (message.author.bot) return
-    if (message.channel.id !== BOT_CHANNEL) return
+// client.on(Events.MessageCreate, async (message) => {
+//     if (message.author.bot) return
+//     if (message.channel.id !== BOT_CHANNEL) return
 
-    message.channel.sendTyping()
+//     message.channel.sendTyping()
 
-    let messages = Array.from(await message.channel.messages.fetch({
-        limit: PAST_MESSAGES,
-        before: message.id
-    }))
-    messages = messages.map(m=>m[1])
-    messages.unshift(message)
+//     let messages = Array.from(await message.channel.messages.fetch({
+//         limit: PAST_MESSAGES,
+//         before: message.id
+//     }))
+//     messages = messages.map(m=>m[1])
+//     messages.unshift(message)
 
-    let users = [...new Set([...messages.map(m=> m.member.displayName), client.user.username])]
+//     let users = [...new Set([...messages.map(m=> m.member.displayName), client.user.username])]
 
-    let lastUser = users.pop()
+//     let lastUser = users.pop()
 
-    let prompt = `The following is a conversation between ${users.join(", ")}, and ${lastUser}. \n\n`
+//     let prompt = `The following is a conversation between ${users.join(", ")}, and ${lastUser}. \n\n`
 
-    for (let i = messages.length - 1; i >= 0; i--) {
-        const m = messages[i]
-        prompt += `${m.member.displayName}: ${m.content}\n`
-    }
-    prompt += `${client.user.username}:`
-    console.log("prompt:", prompt)
+//     for (let i = messages.length - 1; i >= 0; i--) {
+//         const m = messages[i]
+//         prompt += `${m.member.displayName}: ${m.content}\n`
+//     }
+//     prompt += `${client.user.username}:`
+//     console.log("prompt:", prompt)
 
-    const response = await openai.createCompletion({
-        prompt,
-        model: "text-davinci-003",
-        max_tokens: 500,
-        stop: ["\n"]
-    })
+//     const response = await openai.createCompletion({
+//         prompt,
+//         model: "text-davinci-003",
+//         max_tokens: 500,
+//         stop: ["\n"]
+//     })
 
-    console.log("response", response.data.choices[0].text)
-    await message.channel.send(response.data.choices[0].text)
-})
+//     console.log("response", response.data.choices[0].text)
+//     await message.channel.send(response.data.choices[0].text)
+// })
 
 const welcomeChannelId = "" //WELCOME CHANNEL ID
 
@@ -80,22 +81,22 @@ client.on("guildMemberAdd", async (member) => {
     })
 })
 
-// client.slashcommands = new Discord.Collection()
-// client.player = new Player(client, {
-//     ytdlOptions: {
-//         quality: "highestaudio",
-//         highWaterMark: 1 << 25
-//     }
-// })
+client.slashcommands = new Discord.Collection()
+client.player = new Player(client, {
+    ytdlOptions: {
+        quality: "highestaudio",
+        highWaterMark: 1 << 25
+    }
+})
 
-// let commands = []
+let commands = []
 
-// const slashFiles = fs.readdirSync("./slash").filter(file => file.endsWith(".js"))
-// for (const file of slashFiles){
-//     const slashcmd = require(`./slash/${file}`)
-//     client.slashcommands.set(slashcmd.data.name, slashcmd)
-//     if (LOAD_SLASH) commands.push(slashcmd.data.toJSON())
-// }
+const slashFiles = fs.readdirSync("./slash").filter(file => file.endsWith(".js"))
+for (const file of slashFiles){
+    const slashcmd = require(`./slash/${file}`)
+    client.slashcommands.set(slashcmd.data.name, slashcmd)
+    if (LOAD_SLASH) commands.push(slashcmd.data.toJSON())
+}
 
 if (LOAD_SLASH) {
     const rest = new REST({ version: "9" }).setToken(TOKEN)
