@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/soevielofficial/soevielofficial-bot.git"
+    "url": "git+https://github.com/soevielofficial/Lin.git"
   },
   "keywords": [
     "discord-bot"
@@ -16,9 +16,9 @@
   "author": "@soevielofficial",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/soevielofficial/soevielofficial-bot/issues"
+    "url": "https://github.com/soevielofficial/Lin/issues"
   },
-  "homepage": "https://github.com/soevielofficial/soevielofficial-bot#readme",
+  "homepage": "https://github.com/soevielofficial/Lin#readme",
   "dependencies": {
     "@discordjs/builders": "^1.4.0",
     "@discordjs/opus": "^0.8.0",
